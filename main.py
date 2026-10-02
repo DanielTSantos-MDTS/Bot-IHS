@@ -94,3 +94,9 @@ df_cotas_teste.index = range(1, 22)
 # Podemos ainda pegar um subconjunto com .loc e iloc, usando uma lista em vez de 
 # um intervalo
 # print(df_cotas_teste.loc[[1, 5, 10]])
+
+# Ainda sobre .loc[] e .iloc[], podemos também escolher as colunas específicas
+# No caso do .loc[] usamos apenas o nome, no caso de iloc[] temos que usar as
+# posições das colunas
+# print(df_cotas_teste.loc[1:3, ['Cota', 'assembleia']])
+# print(df_cotas_teste.iloc[1:3, :2])
