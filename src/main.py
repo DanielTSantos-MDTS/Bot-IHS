@@ -224,14 +224,23 @@ row = next(df_cotas2.iterrows())[1]
 # ========= Tarefa 1 ===============
 
 # for linha in df_cotas2.iterrows():
-    # OBS: em python, o iterrows() devolve uma tupla, ou seja em formato de (indíce, dados) agrupados e tuplas só aceitam valores por índice. Para conseguir fazer esse tipo de comparação booleana, precisamos desagrupar o índice e os dados da tupla.
-for indice, linha in df_cotas2.iterrows():
-    if pd.notna(linha['Grupo']):
+# OBS: em python, o iterrows() devolve uma tupla, ou seja em formato de (indíce, dados) agrupados e tuplas só aceitam valores por índice. Para conseguir fazer esse tipo de comparação booleana, precisamos desagrupar o índice e os dados da tupla.
+for indice, linha in df_cotas.iterrows():
+    if pd.notna(linha["Grupo"]):
         # print("A cota ", linha["Cota"], "Possui Grupo")
         # Podemos usar strings formatadas para facilitar
         print(f"A cota {linha['Cota']}, já possui Grupo")
     else:
-        print(f"A cota {linha['Cota']}, não possui Grupo")
-
+        assembleia_base = linha["assembleia"]
 # ========= Tarefa 2 ===============
+        assembleia_minima = assembleia_base - 2
+        assembleia_maxima = assembleia_base + 2
+        print(
+            f"A cota {linha['Cota']}, não possui Grupo. A assembleia base é: {linha['assembleia']}. Buscando grupos entre {assembleia_minima} e {assembleia_maxima}"
+        )
+        grupos = df_grupo['assembleia'].between(assembleia_minima, assembleia_maxima)
+        grupos_correspondente = df_grupo[grupos]["grupo"] # Aqui faz o filtro e pega apenas a coluna grupo com base no filtro
+        print(f"Grupos que batem com a assembleia: {grupos_correspondente.tolist()}")
+        # Aqui usamos tolist() para retornar uma lista lado a lado e retirar o índice
+        break
 
